@@ -15,6 +15,39 @@ export interface MetricFilterProps extends MetricFilterOptions {
 }
 
 /**
+ * Properties for a MetricFilter
+ */
+export enum MetricFilterUnits {
+  "Bits" = "Bits",
+  "Bits/Second" = "Bits/Second",
+  "Bytes" = "Bytes",
+  "Bytes/Second" = "Bytes/Second",
+  "Count" = "Count",
+  "Count/Second" = "Count/Second",
+  "Gigabits" = "Gigabits",
+  "Gigabits/Second" = "Gigabits/Second",
+  "Gigabytes" = "Gigabytes",
+  "Gigabytes/Second" = "Gigabytes/Second",
+  "Kilobits" = "Kilobits",
+  "Kilobits/Second" = "Kilobits/Second",
+  "Kilobytes" = "Kilobytes",
+  "Kilobytes/Second" = "Kilobytes/Second",
+  "Megabits" = "Megabits",
+  "Megabits/Second" = "Megabits/Second",
+  "Megabytes" = "Megabytes",
+  "Megabytes/Second" = "Megabytes/Second",
+  "Microseconds" = "Microseconds",
+  "Milliseconds" = "Milliseconds",
+  "None" = "None",
+  "Percent" = "Percent",
+  "Seconds" = "Seconds",
+  "Terabits" = "Terabits",
+  "Terabits/Second" = "Terabits/Second",
+  "Terabytes" = "Terabytes",
+  "Terabytes/Second"
+}
+
+/**
  * A filter that extracts information from CloudWatch Logs and emits to CloudWatch Metrics
  */
 export class MetricFilter extends Resource {
@@ -48,6 +81,7 @@ export class MetricFilter extends Resource {
         metricName: props.metricName,
         metricValue: props.metricValue ?? '1',
         defaultValue: props.defaultValue,
+        unit : props.unit ?? MetricFilterUnits.None,
         dimensions: props.dimensions ? Object.entries(props.dimensions).map(([key, value]) => ({ key, value })) : undefined,
       }],
     });
